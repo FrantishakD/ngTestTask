@@ -21,5 +21,15 @@ public with sharing class RestCalloutService {
         public String title {get; set;}
         public String url {get; set;}
         public String thumbnailUrl {get; set;}
+
+        public Image__c getImage(){
+            return new Image__c(
+                Name = this.title,
+                Source_Id__c = this.id,
+                Album_Id__c = this.albumId,
+                URL__c = this.url,
+                Thumbnail_URL__c = this.thumbnailUrl
+            );
+        }
     }
 }
