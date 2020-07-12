@@ -1,0 +1,45 @@
+<template>
+    
+    <div class="all-container slds-theme_default slds-box">
+        <div onkeyup={handleKeyUp}>
+            <lightning-input
+                name="filter-search"
+                label="Filter images by title"
+                type="search"
+            ></lightning-input>
+        </div>
+        <lightning-input
+                name="email"
+                label="Send filtered records to email"
+                type="email"
+                value={email}
+                onchange={emailChange}
+            ></lightning-input>
+        <lightning-button label="send" onclick={handleSend}></lightning-button>
+        <br/>
+        <template for:each={pageData} for:item="image">
+            <div class="img-container" key={image.Id}>
+                <img src={image.Thumbnail_URL__c} alt={image.Name} key={image.Id} title={image.Name}></img>
+            </div>
+        </template>  
+        <div class="slds-align_absolute-center">
+            <ul class="slds-button-group-row">
+                <template if:true={hasPrev}>
+                    <li class="slds-button-group-item" > 
+                        <button class="slds-button slds-button_neutral" onclick ={onPrev}> prev
+                        </button>
+                    </li>
+                </template>
+                <li class="slds-button-group-item" > 
+                    {page} 
+                </li>
+                <template if:true={hasNext}>
+                    <li class="slds-button-group-item" > 
+                        <button class="slds-button slds-button_neutral"  onclick={onNext} >next</button>
+                    </li>
+                </template>
+            </ul>
+        </div>      
+    </div>    
+    
+</template>
