@@ -2,23 +2,7 @@
 public with sharing class ImageSyncTest {
     @TestSetup
     static void makeData(){
-        Image__c existingImage = new Image__c(
-            Name = 'test',
-            Source_Id__c = '1',
-            Album_Id__c = '1',
-            URL__c = 'https://www.test.test/',
-            Thumbnail_URL__c = 'https://www.test.test/'
-        );
-
-        Image__c imageToDelete = new Image__c(
-            Name = 'test to delete',
-            Source_Id__c = '2',
-            Album_Id__c = '1',
-            URL__c = 'https://www.test.test/',
-            Thumbnail_URL__c = 'https://www.test.test/'
-        );
-
-        insert new List<Image__c>{existingImage, imageToDelete};
+        TestDataFactory.createImages();
     }
 
     @isTest
