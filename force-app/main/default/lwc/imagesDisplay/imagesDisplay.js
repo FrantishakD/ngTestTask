@@ -33,6 +33,7 @@ export default class ImagesDisplay extends LightningElement {
 
     setPages(){
         this.pages = [];
+        this.page = 1;
         let numberOfPages = Math.ceil(this.filteredData.length / this.perpage);
         for (let index = 1; index <= numberOfPages; index++) {
             this.pages.push(index);
