@@ -40,5 +40,13 @@
         <members>*</members>
         <name>CustomField</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Images_Display</members>
+        <name>FlexiPage</name>
+    </types>
     <version>48.0</version>
 </Package>
