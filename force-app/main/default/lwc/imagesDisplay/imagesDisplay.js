@@ -1,6 +1,7 @@
 import { LightningElement, track, wire, api } from 'lwc';
 import getImages from '@salesforce/apex/ImageDisplayController.getImages';
 import sendEmail from '@salesforce/apex/ImageDisplayController.sendEmail';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class ImagesDisplay extends LightningElement {
     allImages = [];
@@ -15,7 +16,6 @@ export default class ImagesDisplay extends LightningElement {
         if(data){
             this.allImages = data;
             this.setPages();
-            console.log(data.length);
         } else if(error){
             console.error(error);
         }
@@ -64,7 +64,6 @@ export default class ImagesDisplay extends LightningElement {
     
     @api
     get hasNext(){
-        console.log('has next' + this.page + ' ' + this.pages.length);
         return this.page < this.pages.length
     }
 
@@ -86,7 +85,23 @@ export default class ImagesDisplay extends LightningElement {
 
     handleSend(){
         if(this.email){
-            sendEmail({images : this.filteredData, email : this.email}).then(console.log('success')).catch(e => console.error(e));
+            sendEmail({images : this.filteredData, email : this.email}).then(() => {
+                const success = new ShowToastEvent({
+                    title: 'Success',
+                    message: 'Email sent successfuly',
+                    variant: 'success'
+                });
+                this.dispatchEvent(success);
+                this.email = '';
+            }).catch(e => {
+                const error = new ShowToastEvent({
+                    title: 'Error',
+                    message: 'Error occured',
+                    variant: 'error'
+                });
+                this.dispatchEvent(error);
+                console.error(e);
+            });
         }
     }
 }
