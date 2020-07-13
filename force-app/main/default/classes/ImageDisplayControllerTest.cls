@@ -9,6 +9,6 @@ public class ImageDisplayControllerTest {
     static void sendEmailTest(){
         Integer emailbefore = Limits.getEmailInvocations();
         ImageDisplayController.sendEmail(ImageDisplayController.getImages(), 'test@test.com');
-        System.assertNotEquals(emailbefore, Limits.getEmailInvocations());
+        System.assertEquals(emailbefore + 1, Limits.getEmailInvocations());
     }
 }
